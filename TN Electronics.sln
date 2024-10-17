@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BACK", "BACK", "{7D49A9B8-AFD9-4E31-AF77-27553AF3EB9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TNElectronics_Back", "BACK\TNElectronics_Back\TNElectronics_Back.csproj", "{3AAE4321-7FBC-40E9-AFA9-C13A97FE21E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AAE4321-7FBC-40E9-AFA9-C13A97FE21E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AAE4321-7FBC-40E9-AFA9-C13A97FE21E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AAE4321-7FBC-40E9-AFA9-C13A97FE21E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AAE4321-7FBC-40E9-AFA9-C13A97FE21E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3AAE4321-7FBC-40E9-AFA9-C13A97FE21E6} = {7D49A9B8-AFD9-4E31-AF77-27553AF3EB9F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FFDCCA1-0BA3-4341-8E4E-615678855354}
+	EndGlobalSection
+EndGlobal
