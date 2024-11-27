@@ -19,7 +19,6 @@ namespace TNElectronics_Back.Controllers
             _context = context;
         }
 
-        [Authorize(Policy = "TipoUsuario")]
         [Route("obtenerProducto")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
@@ -72,11 +71,11 @@ namespace TNElectronics_Back.Controllers
         public async Task<ActionResult<Producto>> PutProducto(int id, ProductoEditDTO productoDto)
         {
             if (id <= 0 || productoDto == null)
-                return BadRequest();
+                return StatusCode(StatusCodes.Status400BadRequest, new { exito = false, mensaje = "Los datos no fueron completados" });
 
             var productoExistente = _context.Productos.Find(id);
             if (productoExistente == null)
-                return NotFound();
+                return StatusCode(StatusCodes.Status404NotFound, new { exito = false, mensaje = "El producto no fue encontrado" });
 
             if (productoDto.Nombre != null)
                 productoExistente.Nombre = productoDto.Nombre;
@@ -90,7 +89,7 @@ namespace TNElectronics_Back.Controllers
 
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return StatusCode(StatusCodes.Status200OK, new { exito = true, mensaje = "Producto editado correctamente" });
         }
 
         [Authorize(Policy = "TipoUsuario")]

@@ -1,18 +1,21 @@
 import { FC, useEffect, useState } from "react";
 import { IProductos } from "../Interfaces/General";
-import { EditarProducto, obtenerProductos } from "../services/ProductoService";
+import { EditarProducto, EliminarProducto, obtenerProductos } from "../services/ProductoService";
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea, useDisclosure } from "@nextui-org/react";
-import { DropdownActionWithModal } from "../Components/DropdownActionWithModal";
+import { DropdownAction } from "../Components/DropdownAction";
 import { format } from "@formkit/tempo"
 import * as XLSX from 'xlsx'
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 type RenderRowProps = {
     item: IProductos;
     i: number;
     onEdit: (usuario: IProductos) => void;
+    onDelate: (id: number) => void;
 }
 
-const RenderRow = ({ item, i, onEdit }: RenderRowProps) => {
+const RenderRow = ({ item, i, onEdit, onDelate }: RenderRowProps) => {
 
     return (
         <tr key={`row-${i}-${Math.random()}`} className="font-medium text-gray-500 text-sm">
@@ -54,7 +57,10 @@ const RenderRow = ({ item, i, onEdit }: RenderRowProps) => {
             <td className="text-left py-2 min-w-[150px]">
                 <div className='flex items-center'>
                     <div className='flex flex-col'>
-                        <DropdownActionWithModal onOpen={() => onEdit(item)} />
+                        <DropdownAction
+                            onOpen={() => onEdit(item)}
+                            onDelete={() => onDelate(item.id)}
+                        />
                     </div>
                 </div>
             </td>
@@ -91,6 +97,42 @@ const Productos: FC = () => {
         }
     };
 
+    const handleEliminarProducto = async (id: number) => {
+        try {
+            const result = await Swal.fire({
+                title: "Eliminar producto",
+                text: "¿Estás seguro que deseas eliminar este producto?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3B82F6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Eliminar",
+                cancelButtonText: "Cancelar"
+            });
+
+            if (result.isConfirmed) {
+                await EliminarProducto(id);
+                await toast.success("El producto fue eliminado con exito", {
+                    position: "top-center",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: false,
+                    progress: undefined,
+                    className: "text-sm font-bold"
+                });
+                consultarListaProductos();
+            }
+        } catch (error) {
+            Swal.fire({
+                title: "Error",
+                text: "No se pudo eliminar el producto",
+                icon: "error"
+            });
+        }
+    };
+
     const exportarProductosExcel = () => {
         if (!productos || productos.length === 0) {
             alert("No hay datos para exportar");
@@ -118,9 +160,11 @@ const Productos: FC = () => {
 
     return (
         <>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
                 <h1 className="font-bold text-2xl p-8" ><i className="fa-solid fa-box mr-2"></i>Pruductos</h1>
                 <Button color="success" radius="full" className="text-base font-semibold text-white" onClick={exportarProductosExcel}><i className="fa-solid fa-table"></i>Exportar</Button>
+                <Button color="primary" radius="full" className="text-base font-semibold text-white" onClick={() => { }}><i className="fa-solid fa-plus"></i>Agragar producto</Button>
+                <Input color="default" className="w-auto border border-gray-200 rounded-full shadow-sm" placeholder="Buscar un producto" radius="full" isClearable startContent={<i className="fa-solid fa-magnifying-glass text-xs"></i>}></Input>
             </div>
             <div className="bg-white rounded px-8 pt-6 pb-8 mb-4">
                 <div className='overflow-x-auto'>
@@ -138,7 +182,7 @@ const Productos: FC = () => {
                         <tbody className="text-gray-700">
                             {productos && productos?.length > 0 ? (
                                 productos.map((row: IProductos, i) => {
-                                    return <RenderRow key={`${Math.random()}-${i}`} i={i} item={row} onEdit={handleEditarProducto} />
+                                    return <RenderRow key={`${Math.random()}-${i}`} i={i} item={row} onEdit={handleEditarProducto} onDelate={handleEliminarProducto} />
                                 })
                             ) : (
                                 <tr>
@@ -174,6 +218,11 @@ const Productos: FC = () => {
                                 <Input
                                     label="Precio:"
                                     placeholder="Precio"
+                                    startContent={
+                                        <div className="pointer-events-none flex items-center">
+                                            <span className="text-default-400 text-small">$</span>
+                                        </div>
+                                    }
                                     value={editarProducto?.precio ? editarProducto.precio.toString() : ''}
                                     onChange={(e) => setEditarProducto({ ...editarProducto!, precio: parseFloat(e.target.value) })}
                                 />

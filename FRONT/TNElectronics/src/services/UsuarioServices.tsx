@@ -62,7 +62,7 @@ export async function EditarUsuario(id: number, data: IEditarUsuario) {
             draggable: false,
             progress: undefined,
             className: "text-sm font-bold"
-        });;
+        });
     } catch (error: any) {
         throw error.response;
     }

@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { IEditarUsuario, IUsuario } from "../Interfaces/IUsuario";
 import { EditarUsuario, ObtenerUsuarios } from "../services/UsuarioServices";
-import { DropdownActionWithModal } from "../Components/DropdownActionWithModal";
+import { DropdownAction } from "../Components/DropdownAction";
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, Select, SelectItem } from "@nextui-org/react";
 
 type RenderRowProps = {
@@ -52,7 +52,7 @@ const RenderRow = ({ item, i, onEdit }: RenderRowProps) => {
             <td className="text-left py-2 min-w-[150px]">
                 <div className='flex items-center'>
                     <div className='flex flex-col'>
-                        <DropdownActionWithModal onOpen={() => onEdit(item)} />
+                        <DropdownAction onOpen={() => onEdit(item)} />
                     </div>
                 </div>
             </td>
@@ -167,7 +167,6 @@ const Usuarios: FC = () => {
                                         </SelectItem>
                                     ))}
                                 </Select>
-
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="default" variant='flat' onPress={onClose}>Cerrar</Button>
