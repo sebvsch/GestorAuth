@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { IAccesoUsuario, IEditarUsuario, IRegistrarUsuario } from "../Interfaces/IUsuario";
+import { toast } from "react-toastify";
 
 const URL_DEV = import.meta.env.VITE_URL
 
@@ -52,7 +53,16 @@ export async function EditarUsuario(id: number, data: IEditarUsuario) {
                 'Content-Type': 'application/json'
             }
         });
-        return respuesta.data;
+        return toast.success(respuesta.data.mensaje, {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            className: "text-sm font-bold"
+        });;
     } catch (error: any) {
         throw error.response;
     }

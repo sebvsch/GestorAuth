@@ -39,10 +39,12 @@ export async function agregarNuevoProducto() {
 }
 
 export async function EditarProducto(id: number, data: IProductos) {
+    const token = localStorage.getItem("token");
     const url = `http://localhost:5204/api/producto/editarProducto/${id}`
     try {
         const respuesta: AxiosResponse = await axios.put(url, data, {
             headers: {
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         });

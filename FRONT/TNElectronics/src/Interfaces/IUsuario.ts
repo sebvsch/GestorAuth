@@ -16,12 +16,13 @@ export interface IUsuario {
     correo: string;
     nombreUsuario: string;
     contrasenia: string;
-    tipoUsuario: "Administrador" | "Gerente";
+    tipoUsuario: "Administrador" | "Gerente" | "Testing" | "Reportes" | string
 }
 
 export interface IEditarUsuario {
-    nombreCompleto: string
-    correo: string
-    nombreUsuario: string
-    tipoUsuario: string
+    idUsuario: number;
+    nombreCompleto: string;
+    correo: string;
+    nombreUsuario: string;
+    tipoUsuario: "Administrador" | "Gerente" | "Testing" | "Reportes" | string
 }

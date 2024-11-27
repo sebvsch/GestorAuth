@@ -2,82 +2,15 @@ import { FC, useEffect, useState } from "react";
 import { IEditarUsuario, IUsuario } from "../Interfaces/IUsuario";
 import { EditarUsuario, ObtenerUsuarios } from "../services/UsuarioServices";
 import { DropdownActionWithModal } from "../Components/DropdownActionWithModal";
-import { useDisclosure } from "@nextui-org/react";
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, Select, SelectItem } from "@nextui-org/react";
 
 type RenderRowProps = {
     item: IUsuario;
     i: number;
+    onEdit: (usuario: IEditarUsuario) => void;
 }
 
-const RenderRow = ({ item, i, }: RenderRowProps) => {
-
-    const [editarUsuario, setEditarUsuario] = useState<IEditarUsuario>({
-        nombreCompleto: item.nombreCompleto,
-        correo: item.correo,
-        nombreUsuario: item.nombreUsuario,
-        tipoUsuario: item.tipoUsuario
-    })
-
-    const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-
-
-    const editarUser = async () => {
-        try {
-            await EditarUsuario(item.idUsuario, editarUsuario);
-        } catch (e: any) {
-            console.log(e);
-        }
-    };
-
-    const handleEditar = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            await editarUser();
-        } catch (e: any) {
-            console.log(e);
-        }
-    };
-
-    const campos = [
-        {
-            label: "ID Usuario:",
-            placeholder: "ID",
-            defaultValue: item.idUsuario,
-            value: item.idUsuario,
-            disabled: true,
-        },
-        {
-            label: "Nombre Completo:",
-            placeholder: "Nombre Completo",
-            value: editarUsuario.nombreCompleto,
-            defaultValue: editarUsuario.nombreCompleto,
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEditarUsuario({ ...editarUsuario, nombreCompleto: e.target.value }),
-            disabled: false,
-        },
-        {
-            label: "Nombre de Usuario:",
-            placeholder: "Nombre de Usuario",
-            value: editarUsuario.nombreUsuario,
-            defaultValue: editarUsuario.nombreUsuario,
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEditarUsuario({ ...editarUsuario, nombreUsuario: e.target.value }),
-            disabled: false,
-        },
-        {
-            label: "Correo:",
-            placeholder: "Correo",
-            value: editarUsuario.correo,
-            defaultValue: editarUsuario.correo,
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEditarUsuario({ ...editarUsuario, correo: e.target.value }),
-            disabled: false,
-        },
-        {
-            label: "Tipo Usuario:",
-            placeholder: "Tipo Usuario",
-            value: editarUsuario.tipoUsuario,
-            defaultValue: editarUsuario.tipoUsuario,
-            disabled: true,
-        }
-    ];
+const RenderRow = ({ item, i, onEdit }: RenderRowProps) => {
 
     return (
         <tr key={`row-${i}-${Math.random()}`} className="font-medium text-gray-500 text-sm">
@@ -119,14 +52,7 @@ const RenderRow = ({ item, i, }: RenderRowProps) => {
             <td className="text-left py-2 min-w-[150px]">
                 <div className='flex items-center'>
                     <div className='flex flex-col'>
-                        <DropdownActionWithModal
-                            campos={campos}
-                            onSubmit={handleEditar}
-                            onOpen={onOpen}
-                            isOpen={isOpen}
-                            onClose={onClose}
-                            onOpenChange={onOpenChange}
-                        />
+                        <DropdownActionWithModal onOpen={() => onEdit(item)} />
                     </div>
                 </div>
             </td>
@@ -137,12 +63,32 @@ const RenderRow = ({ item, i, }: RenderRowProps) => {
 const Usuarios: FC = () => {
 
     const [usuarios, setUsuarios] = useState<Array<IUsuario> | null>(null)
+    const [editarUsuario, setEditarUsuario] = useState<IEditarUsuario | null>(null);
+    const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
 
     const consultarListaUsuarios = async () => {
         await ObtenerUsuarios().then(respuesta => {
             setUsuarios(respuesta as Array<IUsuario>)
         })
     }
+
+    const handleEditarUsuario = async (usuario?: IEditarUsuario) => {
+        if (usuario) {
+            setEditarUsuario(usuario)
+            onOpen();
+        }
+        else if (editarUsuario) {
+            try {
+                await EditarUsuario(editarUsuario.idUsuario, editarUsuario);
+                onClose();
+                consultarListaUsuarios();
+            } catch (e: any) {
+                console.error(e);
+            }
+        }
+    };
+
 
     useEffect(() => {
         consultarListaUsuarios()
@@ -170,7 +116,7 @@ const Usuarios: FC = () => {
                         <tbody className="text-gray-700">
                             {usuarios && usuarios?.length > 0 ? (
                                 usuarios.map((row: IUsuario, i) => {
-                                    return <RenderRow key={`${Math.random()}-${i}`} i={i} item={row} />
+                                    return <RenderRow key={`${Math.random()}-${i}`} i={i} item={row} onEdit={handleEditarUsuario} />
                                 })
                             ) : (
                                 <tr>
@@ -185,6 +131,52 @@ const Usuarios: FC = () => {
                     </table>
                 </div>
             </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent>
+                    {onClose && (
+                        <>
+                            <ModalHeader>Editar Usuario</ModalHeader>
+                            <ModalBody>
+                                <Input
+                                    label="Nombre Completo:"
+                                    placeholder="Nombre Completo"
+                                    value={editarUsuario?.nombreCompleto}
+                                    onChange={(e) => setEditarUsuario({ ...editarUsuario!, nombreCompleto: e.target.value })}
+                                />
+                                <Input
+                                    label="Nombre de Usuario:"
+                                    placeholder="Nombre de Usuario"
+                                    value={editarUsuario?.nombreUsuario}
+                                    onChange={(e) => setEditarUsuario({ ...editarUsuario!, nombreUsuario: e.target.value })}
+                                />
+                                <Input
+                                    label="Correo:"
+                                    placeholder="Correo"
+                                    value={editarUsuario?.correo}
+                                    onChange={(e) => setEditarUsuario({ ...editarUsuario!, correo: e.target.value })}
+                                />
+                                <Select
+                                    label="Tipo de usuario"
+                                    placeholder={editarUsuario?.tipoUsuario}
+                                    value={editarUsuario?.tipoUsuario}
+                                    onChange={(e) => setEditarUsuario({ ...editarUsuario!, tipoUsuario: e.target.value })}
+                                >
+                                    {["Administrador", "Gerente", "Testing", "Reportes"].map((tipo) => (
+                                        <SelectItem key={tipo} value={tipo}>
+                                            {tipo}
+                                        </SelectItem>
+                                    ))}
+                                </Select>
+
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="default" variant='flat' onPress={onClose}>Cerrar</Button>
+                                <Button type="button" color="primary" onPress={() => handleEditarUsuario()}>Guardar cambios</Button>
+                            </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
         </>
     )
 }
