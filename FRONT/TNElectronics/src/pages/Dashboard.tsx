@@ -1,28 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { CardIrA } from "../Components/CardIrA";
-import { CurrentUser } from "../services/UsuarioServices";
+import { useAuth } from "../auth/AuthProvider";
 
 const Dashboard: FC = () => {
 
-    interface ICurrentUser {
-        idUsuario: string
-        nombreCompleto: string
-        correo: string
-        nombreUsuario: string
-        tipoUsuario: string
-    }
-
-    const [currentUser, setCurrentUser] = useState<ICurrentUser | null>(null)
-
-    const ObtenerCurrentUser = async () => {
-        await CurrentUser().then(respuesta => {
-            setCurrentUser(respuesta as ICurrentUser)
-        })
-    }
-
-    useEffect(() => {
-        ObtenerCurrentUser()
-    }, [])
+    const { currentUser } = useAuth()
 
     return (
         <>

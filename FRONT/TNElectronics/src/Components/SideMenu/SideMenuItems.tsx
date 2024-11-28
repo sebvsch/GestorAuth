@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 type SideMenuItemsProps = {
     icon?: string,
     direccion: string
-    titulo: string,
+    titulo: string | undefined,
     activo: boolean
 }
 

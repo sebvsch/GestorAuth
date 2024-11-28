@@ -26,3 +26,10 @@ export interface IEditarUsuario {
     nombreUsuario: string;
     tipoUsuario: "Administrador" | "Gerente" | "Testing" | "Reportes" | string
 }
+export interface ICurrentUser {
+    idUsuario: string
+    nombreCompleto: string
+    correo: string
+    nombreUsuario: string
+    tipoUsuario: string
+}

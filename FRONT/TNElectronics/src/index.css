@@ -5,6 +5,7 @@
 
 body {
     background-color: #F6F7F9;
+    overflow: hidden;
 }
 
 @tailwind base;
