@@ -28,6 +28,21 @@ export async function AccesoUsuario(dataAcceso: IAccesoUsuario) {
     }
 }
 
+export async function CurrentUser() {
+    const token = localStorage.getItem("token");
+    const url = `${URL_DEV}/api/usuario/currentUser`
+    try {
+        const respuesta: AxiosResponse = await axios.get(url, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return respuesta.data;
+    } catch (error: any) {
+        throw error.response;
+    }
+}
+
 export async function ObtenerUsuarios() {
     const token = localStorage.getItem("token");
     const url = `${URL_DEV}/api/usuario/obtenerUsuarios`

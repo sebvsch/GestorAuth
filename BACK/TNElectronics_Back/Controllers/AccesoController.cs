@@ -6,6 +6,7 @@ using TNElectronics_Back.Custom;
 using TNElectronics_Back.Models;
 using TNElectronics_Back.Models.DTOs;
 using TNElectronics_Back.Data;
+using System.Security.Claims;
 
 
 namespace TNElectronics_Back.Controllers
@@ -60,5 +61,33 @@ namespace TNElectronics_Back.Controllers
             else
                 return StatusCode(StatusCodes.Status200OK, new { exito = true, token = _utilidades.generarJWT(usarioRegistrado) });
         }
+
+        [HttpGet]
+        [Authorize(Policy = "TipoUsuario")]
+        [Route("currentUser")]
+        public IActionResult GetCurrentUser()
+        {
+
+            if (User.Identity == null || !User.Identity.IsAuthenticated)
+            {
+                return Unauthorized(new { mensaje = "Usuario no autenticado" });
+            }
+
+
+            var nombreCompleto = User.FindFirst(ClaimTypes.Name)?.Value;
+            var correo = User.FindFirst(ClaimTypes.Email)?.Value;
+            var nombreUsuario = User.FindFirst("NombreUsuario")?.Value;
+            var tipoUsuario = User.FindFirst("TipoUsuario")?.Value;
+
+
+            return Ok(new
+            {
+                nombreCompleto,
+                correo,
+                nombreUsuario,
+                tipoUsuario
+            });
+        }
+
     }
 }
