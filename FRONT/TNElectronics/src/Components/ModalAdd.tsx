@@ -6,6 +6,7 @@ type Campos = {
     placeholder: string;
     value: string | number;
     onChange: React.ChangeEventHandler<HTMLInputElement>
+    startContent?: string
 }
 
 type ModalAddProps = {
@@ -34,6 +35,11 @@ export const ModalAdd: FC<ModalAddProps> = ({ isOpen, onOpenChange, onClose, cam
                                             placeholder={campo.placeholder}
                                             value={campo.value.toString()}
                                             onChange={campo.onChange}
+                                            startContent={
+                                                <div className="pointer-events-none flex items-center">
+                                                    <span className="text-default-400 text-small">{campo.startContent}</span>
+                                                </div>
+                                            }
                                         />
                                     ))}
                                 </ModalBody>

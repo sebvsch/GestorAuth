@@ -198,7 +198,8 @@ const Productos: FC = () => {
             label: "Precio",
             placeholder: "Precio",
             value: agregarProducto?.precio ? agregarProducto.precio.toString() : '',
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAgregarProducto({ ...agregarProducto, precio: parseFloat(e.target.value) })
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAgregarProducto({ ...agregarProducto, precio: parseFloat(e.target.value) }),
+            startContent: "$"
         }
     ]
 
