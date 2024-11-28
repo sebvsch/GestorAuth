@@ -66,7 +66,6 @@ const Usuarios: FC = () => {
     const [editarUsuario, setEditarUsuario] = useState<IEditarUsuario | null>(null);
     const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
-
     const consultarListaUsuarios = async () => {
         await ObtenerUsuarios().then(respuesta => {
             setUsuarios(respuesta as Array<IUsuario>)
@@ -89,11 +88,9 @@ const Usuarios: FC = () => {
         }
     };
 
-
     useEffect(() => {
         consultarListaUsuarios()
     }, [])
-
 
     return (
         <>

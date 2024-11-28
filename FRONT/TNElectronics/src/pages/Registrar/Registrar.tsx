@@ -13,7 +13,8 @@ const Registrar: FC = () => {
         contrasenia: ""
     })
 
-    const requestRegistrar = async () => {
+    const handleRegistrar = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         const data = {
             nombreCompleto: registrarUsuario.nombreCompleto,
             correo: registrarUsuario.correo,
@@ -22,15 +23,6 @@ const Registrar: FC = () => {
         }
         try {
             await RegistrarUsuario(data)
-        } catch (e: any) {
-            console.log(e)
-        }
-    }
-
-    const handleRegistrar = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        try {
-            await requestRegistrar()
             setRegistrarUsuario({
                 nombreCompleto: "",
                 correo: "",
@@ -41,7 +33,6 @@ const Registrar: FC = () => {
             console.log(e)
         }
     }
-
 
     return (
         <>

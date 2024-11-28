@@ -20,11 +20,11 @@ export async function AccesoUsuario(dataAcceso: IAccesoUsuario) {
         const respuesta: AxiosResponse = await axios.post(url, dataAcceso);
         if (respuesta.data.exito) {
             localStorage.setItem('token', respuesta.data.token);
-            window.location.reload()
+            window.location.reload();
         }
         return respuesta.data;
     } catch (error: any) {
-        throw error.response;
+        throw error.response
     }
 }
 

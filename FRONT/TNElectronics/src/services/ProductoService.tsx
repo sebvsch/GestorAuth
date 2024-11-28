@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IProductos } from "../Interfaces/General";
+import { IAgregarProductos, IProductos } from "../Interfaces/General";
 import { toast } from "react-toastify";
 
 const URL_DEV = import.meta.env.VITE_URL
@@ -25,10 +25,16 @@ export async function obtenerProductosById(id: number) {
     }
 }
 
-export async function agregarNuevoProducto() {
+export async function agregarNuevoProducto(data: IAgregarProductos) {
+    const token = localStorage.getItem("token");
     const url = `${URL_DEV}/api/producto/crearProducto`
     try {
-        const respuesta: AxiosResponse = await axios.post(url);
+        const respuesta: AxiosResponse = await axios.post(url, data, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
         return respuesta.data;
     } catch (error: any) {
         throw error.response;

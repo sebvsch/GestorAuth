@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import { IAccesoUsuario } from "../../Interfaces/IUsuario";
 import { AccesoUsuario } from "../../services/UsuarioServices";
 import { Link } from "react-router-dom";
-// import ReCAPTCHA from "react-google-recaptcha";
 import { Button, Link as LinkNUI } from "@nextui-org/react";
+import { toast } from "react-toastify";
 
 const Login: FC = () => {
 
@@ -11,9 +11,9 @@ const Login: FC = () => {
         usuarioOCorreo: "",
         contrasenia: ""
     })
-    // const [capVal, setCapVal] = useState<boolean>(false);
 
-    const loginRequest = async () => {
+    const handleAcceder = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         const data = {
             usuarioOCorreo: loginUsuario.usuarioOCorreo,
             contrasenia: loginUsuario.contrasenia
@@ -21,16 +21,16 @@ const Login: FC = () => {
         try {
             await AccesoUsuario(data)
         } catch (e: any) {
-            console.error("No se pudo inicar sesión");
-        }
-    }
-
-    const handleAcceder = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        try {
-            await loginRequest()
-        } catch (e: any) {
-            console.log("No se pudo inicar sesión")
+            toast.error("Credenciales incorrectas 🤷‍♂️", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                className: "text-xs font-bold"
+            })
         }
     };
 
@@ -69,11 +69,6 @@ const Login: FC = () => {
                             />
                         </div>
                     </div>
-                    {/* <ReCAPTCHA
-                        sitekey="6LdLIEYqAAAAAEnQG5FR5mUr6kRM3yBw5MBSOIgN"
-                        onChange={(val) => setCapVal(val)}
-                        className="flex justify-center my-6"
-                    /> */}
                     <div className="mb-6">
                         <LinkNUI >
                             <Link to="/registrarse">¿No estas registrado?</Link>

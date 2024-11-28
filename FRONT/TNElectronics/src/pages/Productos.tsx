@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from "react";
-import { IProductos } from "../Interfaces/General";
-import { EditarProducto, EliminarProducto, obtenerProductos } from "../services/ProductoService";
+import { IAgregarProductos, IProductos } from "../Interfaces/General";
+import { agregarNuevoProducto, EditarProducto, EliminarProducto, obtenerProductos } from "../services/ProductoService";
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea, useDisclosure } from "@nextui-org/react";
 import { DropdownAction } from "../Components/DropdownAction";
 import { format } from "@formkit/tempo"
 import * as XLSX from 'xlsx'
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { ModalAdd } from "../Components/ModalAdd";
 
 type RenderRowProps = {
     item: IProductos;
@@ -73,7 +74,13 @@ const Productos: FC = () => {
 
     const [productos, setProductos] = useState<Array<IProductos> | null>(null)
     const [editarProducto, setEditarProducto] = useState<IProductos | null>(null);
-    const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+    const [agregarProducto, setAgregarProducto] = useState<IAgregarProductos>({
+        nombre: "",
+        precio: 0,
+        descripcion: ""
+    });
+    const { isOpen: isOpenEdit, onOpen: onOpenEdit, onOpenChange: onOpenChangeEdit, onClose: onCloseEdit } = useDisclosure();
+    const { isOpen: isOpenAdd, onOpen: onOpenAdd, onOpenChange: onOpenChangeAdd, onClose: onCloseAdd } = useDisclosure();
 
     const consultarListaProductos = async () => {
         await obtenerProductos().then(respuesta => {
@@ -81,15 +88,36 @@ const Productos: FC = () => {
         })
     }
 
+    const handleAgregarProducto = async (e: any) => {
+        e.preventDefault()
+        const data = {
+            nombre: agregarProducto.nombre,
+            precio: agregarProducto.precio,
+            descripcion: agregarProducto.descripcion,
+        }
+        try {
+            await agregarNuevoProducto(data)
+            onCloseAdd()
+            consultarListaProductos();
+            setAgregarProducto({
+                nombre: "",
+                precio: 0,
+                descripcion: "",
+            })
+        } catch (e: any) {
+            console.log(e)
+        }
+    }
+
     const handleEditarProducto = async (producto?: IProductos) => {
         if (producto) {
             setEditarProducto(producto)
-            onOpen();
+            onOpenEdit();
         }
         else if (editarProducto) {
             try {
                 await EditarProducto(editarProducto.id, editarProducto);
-                onClose();
+                onCloseEdit();
                 consultarListaProductos();
             } catch (e: any) {
                 console.error(e);
@@ -153,6 +181,27 @@ const Productos: FC = () => {
         XLSX.writeFile(workbook, "Productos.xlsx");
     }
 
+    const campos = [
+        {
+            label: "Nombre del Producto",
+            placeholder: "Nombre del Producto",
+            value: agregarProducto.nombre,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAgregarProducto({ ...agregarProducto, nombre: e.target.value })
+        },
+        {
+            label: "Descripción",
+            placeholder: "Descripción",
+            value: agregarProducto.descripcion,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAgregarProducto({ ...agregarProducto, descripcion: e.target.value })
+        },
+        {
+            label: "Precio",
+            placeholder: "Precio",
+            value: agregarProducto?.precio ? agregarProducto.precio.toString() : '',
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAgregarProducto({ ...agregarProducto, precio: parseFloat(e.target.value) })
+        }
+    ]
+
 
     useEffect(() => {
         consultarListaProductos()
@@ -163,7 +212,23 @@ const Productos: FC = () => {
             <div className="flex items-center gap-2">
                 <h1 className="font-bold text-2xl p-8" ><i className="fa-solid fa-box mr-2"></i>Pruductos</h1>
                 <Button color="success" radius="full" className="text-base font-semibold text-white" onClick={exportarProductosExcel}><i className="fa-solid fa-table"></i>Exportar</Button>
-                <Button color="primary" radius="full" className="text-base font-semibold text-white" onClick={() => { }}><i className="fa-solid fa-plus"></i>Agragar producto</Button>
+                <Button color="primary" radius="full" className="text-base font-semibold text-white" onClick={onOpenAdd}><i className="fa-solid fa-plus"></i>Agragar producto</Button>
+                <ModalAdd
+                    titulo="Producto"
+                    isOpen={isOpenAdd}
+                    onOpenChange={onOpenChangeAdd}
+                    onClose={() => {
+                        onCloseAdd();
+                        setAgregarProducto({
+                            nombre: "",
+                            precio: 0,
+                            descripcion: "",
+                        })
+                    }}
+                    campos={campos}
+                    onSubmit={handleAgregarProducto}
+
+                />
                 <Input color="default" className="w-auto border border-gray-200 rounded-full shadow-sm" placeholder="Buscar un producto" radius="full" isClearable startContent={<i className="fa-solid fa-magnifying-glass text-xs"></i>}></Input>
             </div>
             <div className="bg-white rounded px-8 pt-6 pb-8 mb-4">
@@ -197,11 +262,11 @@ const Productos: FC = () => {
                     </table>
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal isOpen={isOpenEdit} onOpenChange={onOpenChangeEdit}>
                 <ModalContent>
-                    {onClose && (
+                    {onCloseEdit && (
                         <>
-                            <ModalHeader>Editar Usuario</ModalHeader>
+                            <ModalHeader>Editar Producto</ModalHeader>
                             <ModalBody>
                                 <Input
                                     label="Producto"
@@ -229,7 +294,7 @@ const Productos: FC = () => {
 
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="default" variant='flat' onPress={onClose}>Cerrar</Button>
+                                <Button color="default" variant='flat' onPress={onCloseEdit}>Cerrar</Button>
                                 <Button type="button" color="primary" onPress={() => handleEditarProducto()}>Guardar cambios</Button>
                             </ModalFooter>
                         </>

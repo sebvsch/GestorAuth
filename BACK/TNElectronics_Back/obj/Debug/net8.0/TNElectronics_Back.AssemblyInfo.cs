@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TNElectronics_Back")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6734a2988b28147285fe435eb017a4b2966842c7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3daf7e9e8761eb59f47e117df409c674f98c302")]
 [assembly: System.Reflection.AssemblyProductAttribute("TNElectronics_Back")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TNElectronics_Back")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

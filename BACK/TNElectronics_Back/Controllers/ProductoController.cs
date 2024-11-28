@@ -47,7 +47,7 @@ namespace TNElectronics_Back.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return StatusCode(StatusCodes.Status400BadRequest, new { exito = false, mensaje = "El producto no pudo ser agregado" });
             }
 
             var producto = new Producto
@@ -61,7 +61,7 @@ namespace TNElectronics_Back.Controllers
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProductos), new { id = producto.Id }, producto);
+            return StatusCode(StatusCodes.Status200OK, new { exito = true, mensaje = "El producto se agrego correctamente" });
 
         }
 
