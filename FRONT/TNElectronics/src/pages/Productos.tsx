@@ -81,6 +81,7 @@ const Productos: FC = () => {
     });
     const { isOpen: isOpenEdit, onOpen: onOpenEdit, onOpenChange: onOpenChangeEdit, onClose: onCloseEdit } = useDisclosure();
     const { isOpen: isOpenAdd, onOpen: onOpenAdd, onOpenChange: onOpenChangeAdd, onClose: onCloseAdd } = useDisclosure();
+    const [buscarProducto, setbuscarProducto] = useState<string>("")
 
     const consultarListaProductos = async () => {
         await obtenerProductos().then(respuesta => {
@@ -203,6 +204,11 @@ const Productos: FC = () => {
         }
     ]
 
+    const productosFiltrados = productos?.filter(producto =>
+        producto.nombre.toLowerCase().includes(buscarProducto.toLowerCase()) ||
+        producto.descripcion.toLowerCase().includes(buscarProducto.toLowerCase()) ||
+        producto.precio.toString().toLowerCase().includes(buscarProducto.toLowerCase())
+    );
 
     useEffect(() => {
         consultarListaProductos()
@@ -230,7 +236,16 @@ const Productos: FC = () => {
                     onSubmit={handleAgregarProducto}
 
                 />
-                <Input color="default" className="w-auto border border-gray-200 rounded-full shadow-sm" placeholder="Buscar un producto" radius="full" isClearable startContent={<i className="fa-solid fa-magnifying-glass text-xs"></i>}></Input>
+                <Input
+                    value={buscarProducto}
+                    color="default"
+                    className="w-auto border border-gray-200 rounded-full shadow-sm"
+                    placeholder="Buscar un producto"
+                    radius="full"
+                    startContent={<i className="fa-solid fa-magnifying-glass text-xs"></i>}
+                    onChange={(e) => setbuscarProducto(e.target.value)}
+                >
+                </Input>
             </div>
             <div className="bg-white rounded px-8 pt-6 pb-8 mb-4">
                 <div className='overflow-x-auto'>
@@ -246,8 +261,8 @@ const Productos: FC = () => {
                             </tr>
                         </thead>
                         <tbody className="text-gray-700">
-                            {productos && productos?.length > 0 ? (
-                                productos.map((row: IProductos, i) => {
+                            {productosFiltrados && productosFiltrados?.length > 0 ? (
+                                productosFiltrados.map((row: IProductos, i) => {
                                     return <RenderRow key={`${Math.random()}-${i}`} i={i} item={row} onEdit={handleEditarProducto} onDelate={handleEliminarProducto} />
                                 })
                             ) : (

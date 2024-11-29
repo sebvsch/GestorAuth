@@ -39,7 +39,7 @@ export async function CurrentUser() {
         });
         return respuesta.data;
     } catch (error: any) {
-        throw error.response;
+        throw error.response
     }
 }
 

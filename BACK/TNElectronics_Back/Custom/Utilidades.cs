@@ -50,7 +50,7 @@ namespace TNElectronics_Back.Custom
 
             var jwtConfig = new JwtSecurityToken(
                 claims: userClaims,
-                expires: DateTime.UtcNow.AddMinutes(20),
+                expires: DateTime.UtcNow.AddMinutes(35),
                 signingCredentials: credentials
             );
 

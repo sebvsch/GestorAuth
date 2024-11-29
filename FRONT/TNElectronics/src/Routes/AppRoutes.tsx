@@ -7,6 +7,7 @@ import { Dashboard } from "../pages/Dashboard";
 import { Productos } from "../pages/Productos";
 import { Usuarios } from "../pages/Usuarios";
 import { PerfilUsuario } from "../pages/PerfilUsuario";
+import { useAuth } from "../auth/AuthProvider";
 
 const PrivateRoutes: FC = () => {
     const auth = localStorage.getItem("token");
@@ -20,15 +21,29 @@ const PublicRoutes: FC = () => {
 
 const AppRoutes: FC = () => {
 
+    const { currentUser } = useAuth()
+
     return (
         <>
             <Routes>
                 <Route element={<PrivateRoutes />}>
                     <Route element={<MasterLayout />}>
-                        <Route path='/dashboard' element={<Dashboard />} />
-                        <Route path='/productos' element={<Productos />} />
-                        <Route path='/usuarios' element={<Usuarios />} />
-                        <Route path='/perfil/:usuario' element={<PerfilUsuario />} />
+                        {currentUser?.tipoUsuario === "Administrador" &&
+                            <>
+                                <Route path='/dashboard' element={<Dashboard />} />
+                                <Route path='/productos' element={<Productos />} />
+                                <Route path='/usuarios' element={<Usuarios />} />
+                                <Route path='/perfil/:usuario' element={<PerfilUsuario />} />
+
+                            </>
+                        }
+                        {currentUser?.tipoUsuario === "Testing" &&
+                            <>
+                                <Route path='/dashboard' element={<Dashboard />} />
+                                <Route path='/productos' element={<Productos />} />
+                                <Route path='/perfil/:usuario' element={<PerfilUsuario />} />
+                            </>
+                        }
                         <Route path="/*" element={<Navigate to="/dashboard" />} />
                     </Route>
                 </Route>
