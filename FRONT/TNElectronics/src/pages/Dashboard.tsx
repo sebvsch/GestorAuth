@@ -11,7 +11,7 @@ const Dashboard: FC = () => {
             <div className="flex justify-center">
                 <h1 className="text-3xl font-light m-4">{"Bienvenido "}<span className="font-semibold">{currentUser?.nombreCompleto}</span>👋</h1>
             </div>
-            <div className="grid grid-cols-2 gap-4 m-4">
+            <div className="flex flex-wrap justify-center gap-3 m-4">
                 {currentUser?.tipoUsuario === "Administrador" &&
                     <>
                         <CardIrA titulo="Productos" direccion="/productos" colorTexto="text-orange-500" />
