@@ -7,7 +7,11 @@ const URL_DEV = import.meta.env.VITE_URL
 export async function RegistrarUsuario(usuarioData: IRegistrarUsuario) {
     const url = `${URL_DEV}/api/usuario/registrarse`
     try {
-        const respuesta: AxiosResponse = await axios.post(url, usuarioData);
+        const respuesta: AxiosResponse = await axios.post(url, usuarioData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         return respuesta.data;
     } catch (error: any) {
         throw error.response;
