@@ -56,12 +56,6 @@ const SideMenu: FC = () => {
                     }
                 </nav>
                 <div className="pb-4 font-medium text-sm text-slate-500">
-                    <SideMenuItems
-                        direccion={`/perfil/${currentUser?.nombreUsuario}`}
-                        titulo={currentUser?.nombreCompleto}
-                        activo={location.pathname === `/perfil/${currentUser?.nombreUsuario}`}
-                    />
-
                     <Link
                         to="/"
                         onClick={logout}

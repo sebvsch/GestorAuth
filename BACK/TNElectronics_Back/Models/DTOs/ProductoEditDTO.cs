@@ -6,8 +6,11 @@ namespace TNElectronics_Back.Models.DTOs
     {
         public string? Nombre { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? Precio { get; set; }
         public string? Descripcion { get; set; }
+
+        [Column(TypeName = "decimal(10,2)")]
+        public decimal? Precio { get; set; }
+
+        public int? Cantidad { get; set; }
     }
 }

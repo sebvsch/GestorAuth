@@ -30,7 +30,7 @@ namespace TNElectronics_Back.Controllers
         [HttpGet]
         public async Task<ActionResult<Producto>> GetProductoById(int id)
         {
-            var producto = await _context.Productos.FirstOrDefaultAsync(x => x.Id == id);
+            var producto = await _context.Productos.FirstOrDefaultAsync(x => x.IdProducto == id);
 
             if (producto == null)
             {
@@ -53,8 +53,10 @@ namespace TNElectronics_Back.Controllers
             var producto = new Producto
             {
                 Nombre = productoInsert.Nombre,
-                Precio = productoInsert.Precio,
                 Descripcion = productoInsert.Descripcion,
+                Precio = productoInsert.Precio,
+                Cantidad = productoInsert.Cantidad,
+                FechaCreacion = DateTime.Now
             };
 
             _context.Productos.Add(producto);
@@ -73,19 +75,21 @@ namespace TNElectronics_Back.Controllers
             if (id <= 0 || productoDto == null)
                 return StatusCode(StatusCodes.Status400BadRequest, new { exito = false, mensaje = "Los datos no fueron completados" });
 
-            var productoExistente = _context.Productos.Find(id);
+            var productoExistente = await _context.Productos.FindAsync(id);
             if (productoExistente == null)
                 return StatusCode(StatusCodes.Status404NotFound, new { exito = false, mensaje = "El producto no fue encontrado" });
 
             if (productoDto.Nombre != null)
                 productoExistente.Nombre = productoDto.Nombre;
 
+            if (productoDto.Descripcion != null)
+                productoExistente.Descripcion = productoDto.Descripcion;
 
             if (productoDto.Precio.HasValue)
                 productoExistente.Precio = productoDto.Precio.Value;
 
-            if (productoDto.Descripcion != null)
-                productoExistente.Descripcion = productoDto.Descripcion;
+            if (productoDto.Cantidad.HasValue)
+                productoExistente.Cantidad = productoDto.Cantidad.Value;
 
             await _context.SaveChangesAsync();
 
@@ -97,14 +101,14 @@ namespace TNElectronics_Back.Controllers
         [HttpDelete]
         public async Task<ActionResult<Producto>> DelateProducto(int id)
         {
-            var productosExistentes = _context.Productos.Find(id);
+            var productosExistentes = await _context.Productos.FindAsync(id);
             if (productosExistentes is null)
                 return NotFound();
 
             _context.Productos.Remove(productosExistentes);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new { exito = true, mensaje = "Producto eliminado correctamente" });
         }
     }
 }

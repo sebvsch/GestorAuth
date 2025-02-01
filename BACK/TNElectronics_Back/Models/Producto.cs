@@ -5,19 +5,21 @@ namespace TNElectronics_Back.Models
 {
     public class Producto
     {
-        [Key] 
-        public int Id { get; set; }
+        [Key]
+        public int IdProducto { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Nombre { get; set; } = string.Empty;
 
+        [StringLength(250)]
+        public string Descripcion { get; set; } = string.Empty;
+
         [Required]
-        [Column(TypeName = "money")]
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Precio { get; set; }
 
-        [StringLength(100)]
-        public string Descripcion { get; set; } = string.Empty;
+        public int Cantidad { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime FechaCreacion { get; set; } = DateTime.Now;

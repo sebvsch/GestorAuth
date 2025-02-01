@@ -1,12 +1,11 @@
 import { FC } from "react";
 import { Navigate, Route, Routes, Outlet } from "react-router-dom";
-import { Login } from "../pages/Registrar/Login";
-import { Registrar } from "../pages/Registrar/Registrar";
+import { Login } from "../pages/Acceso/Login";
+import { Registrar } from "../pages/Acceso/Registrar";
 import { MasterLayout } from "../Layout/MasterLayout";
 import { Dashboard } from "../pages/Dashboard";
 import { Productos } from "../pages/Productos";
 import { Usuarios } from "../pages/Usuarios";
-import { PerfilUsuario } from "../pages/PerfilUsuario";
 import { useAuth } from "../auth/AuthProvider";
 
 const PrivateRoutes: FC = () => {
@@ -33,7 +32,6 @@ const AppRoutes: FC = () => {
                                 <Route path='/dashboard' element={<Dashboard />} />
                                 <Route path='/productos' element={<Productos />} />
                                 <Route path='/usuarios' element={<Usuarios />} />
-                                <Route path='/perfil/:usuario' element={<PerfilUsuario />} />
 
                             </>
                         }
@@ -41,7 +39,11 @@ const AppRoutes: FC = () => {
                             <>
                                 <Route path='/dashboard' element={<Dashboard />} />
                                 <Route path='/productos' element={<Productos />} />
-                                <Route path='/perfil/:usuario' element={<PerfilUsuario />} />
+                            </>
+                        }
+                        {currentUser?.tipoUsuario === "Usuario Nuevo" &&
+                            <>
+                                <Route path='/dashboard' element={<Dashboard />} />
                             </>
                         }
                         <Route path="/*" element={<Navigate to="/dashboard" />} />

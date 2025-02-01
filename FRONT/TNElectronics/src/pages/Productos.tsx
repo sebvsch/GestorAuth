@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { IAgregarProductos, IProductos } from "../Interfaces/General";
+import { IAgregarProductos, IEditarProducto, IProductos } from "../Interfaces/General";
 import { agregarNuevoProducto, EditarProducto, EliminarProducto, obtenerProductos } from "../services/ProductoService";
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea, useDisclosure } from "@nextui-org/react";
 import { DropdownAction } from "../Components/DropdownAction";
@@ -23,7 +23,7 @@ const RenderRow = ({ item, i, onEdit, onDelate }: RenderRowProps) => {
             <td className="text-left py-2 min-w-[150px]">
                 <div className='flex items-center'>
                     <div className='flex flex-col'>
-                        {item.id}
+                        {item.idProducto}
                     </div>
                 </div>
             </td>
@@ -51,6 +51,13 @@ const RenderRow = ({ item, i, onEdit, onDelate }: RenderRowProps) => {
             <td className="text-left py-2 min-w-[150px]">
                 <div className='flex items-center'>
                     <div className='flex flex-col'>
+                        {item.cantidad}
+                    </div>
+                </div>
+            </td>
+            <td className="text-left py-2 min-w-[150px]">
+                <div className='flex items-center'>
+                    <div className='flex flex-col'>
                         {format(item.fechaCreacion, { date: "medium", time: "medium" })}
                     </div>
                 </div>
@@ -60,7 +67,7 @@ const RenderRow = ({ item, i, onEdit, onDelate }: RenderRowProps) => {
                     <div className='flex flex-col'>
                         <DropdownAction
                             onOpen={() => onEdit(item)}
-                            onDelete={() => onDelate(item.id)}
+                            onDelete={() => onDelate(item.idProducto)}
                         />
                     </div>
                 </div>
@@ -73,15 +80,16 @@ const RenderRow = ({ item, i, onEdit, onDelate }: RenderRowProps) => {
 const Productos: FC = () => {
 
     const [productos, setProductos] = useState<Array<IProductos> | null>(null)
-    const [editarProducto, setEditarProducto] = useState<IProductos | null>(null);
+    const [editarProducto, setEditarProducto] = useState<IEditarProducto | null>(null);
+    const [buscarProducto, setbuscarProducto] = useState<string>("")
     const [agregarProducto, setAgregarProducto] = useState<IAgregarProductos>({
         nombre: "",
+        descripcion: "",
         precio: 0,
-        descripcion: ""
+        cantidad: 0
     });
     const { isOpen: isOpenEdit, onOpen: onOpenEdit, onOpenChange: onOpenChangeEdit, onClose: onCloseEdit } = useDisclosure();
     const { isOpen: isOpenAdd, onOpen: onOpenAdd, onOpenChange: onOpenChangeAdd, onClose: onCloseAdd } = useDisclosure();
-    const [buscarProducto, setbuscarProducto] = useState<string>("")
 
     const consultarListaProductos = async () => {
         await obtenerProductos().then(respuesta => {
@@ -89,12 +97,13 @@ const Productos: FC = () => {
         })
     }
 
-    const handleAgregarProducto = async (e: any) => {
+    const handleAgregarProducto = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const data = {
             nombre: agregarProducto.nombre,
-            precio: agregarProducto.precio,
             descripcion: agregarProducto.descripcion,
+            precio: agregarProducto.precio,
+            cantidad: agregarProducto.cantidad
         }
         try {
             await agregarNuevoProducto(data)
@@ -102,22 +111,23 @@ const Productos: FC = () => {
             consultarListaProductos();
             setAgregarProducto({
                 nombre: "",
-                precio: 0,
                 descripcion: "",
+                precio: 0,
+                cantidad: 0
             })
         } catch (e: any) {
             console.log(e)
         }
     }
 
-    const handleEditarProducto = async (producto?: IProductos) => {
+    const handleEditarProducto = async (producto?: IEditarProducto) => {
         if (producto) {
             setEditarProducto(producto)
             onOpenEdit();
         }
         else if (editarProducto) {
             try {
-                await EditarProducto(editarProducto.id, editarProducto);
+                await EditarProducto(editarProducto.idProducto, editarProducto);
                 onCloseEdit();
                 consultarListaProductos();
             } catch (e: any) {
@@ -168,7 +178,7 @@ const Productos: FC = () => {
             return;
         }
         const datosParaExportar = productos.map(producto => ({
-            ID: producto.id,
+            ID: producto.idProducto,
             Nombre: producto.nombre,
             Descripción: producto.descripcion,
             Precio: producto.precio,
@@ -201,6 +211,12 @@ const Productos: FC = () => {
             value: agregarProducto?.precio ? agregarProducto.precio.toString() : '',
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAgregarProducto({ ...agregarProducto, precio: parseFloat(e.target.value) }),
             startContent: "$"
+        },
+        {
+            label: "Cantidad",
+            placeholder: "Cantidad",
+            value: agregarProducto?.cantidad ? agregarProducto.cantidad.toString() : '',
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAgregarProducto({ ...agregarProducto, cantidad: parseInt(e.target.value, 10) }),
         }
     ]
 
@@ -228,8 +244,9 @@ const Productos: FC = () => {
                         onCloseAdd();
                         setAgregarProducto({
                             nombre: "",
-                            precio: 0,
                             descripcion: "",
+                            precio: 0,
+                            cantidad: 0
                         })
                     }}
                     campos={campos}
@@ -256,6 +273,7 @@ const Productos: FC = () => {
                                 <th>Nombre</th>
                                 <th>Detalle</th>
                                 <th>Precio</th>
+                                <th>Cantidad</th>
                                 <th>Fecha de creacion</th>
                                 <th></th>
                             </tr>
@@ -306,6 +324,13 @@ const Productos: FC = () => {
                                     }
                                     value={editarProducto?.precio ? editarProducto.precio.toString() : ''}
                                     onChange={(e) => setEditarProducto({ ...editarProducto!, precio: parseFloat(e.target.value) })}
+                                />
+                                <Input
+                                    label="Cantidad:"
+                                    placeholder="Cantidad"
+                                    type="number"
+                                    value={editarProducto?.cantidad ? editarProducto.cantidad.toString() : ''}
+                                    onChange={(e) => setEditarProducto({ ...editarProducto!, cantidad: parseInt(e.target.value, 10) })}
                                 />
 
                             </ModalBody>

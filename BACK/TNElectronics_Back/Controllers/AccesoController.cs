@@ -27,14 +27,20 @@ namespace TNElectronics_Back.Controllers
 
         [HttpPost]
         [Route("registrarse")]
-        public async Task<IActionResult> Registrarse(UsuarioDTO usuario)
+        public async Task<IActionResult> Registrarse(RegisterDTO usuario)
         {
+            if (usuario.Contrasenia != usuario.ConfirmarContrasenia)
+            {
+                return BadRequest(new { exito = false, mensaje = "Las contraseñas no coinciden." });
+            }
+
             var usuarioModel = new Usuario
             {
                 NombreCompleto = usuario.NombreCompleto,
                 Correo = usuario.Correo,
                 NombreUsuario = usuario.NombreUsuario,
-                Contrasenia = _utilidades.encriptarSHA256(usuario.Contrasenia)
+                Contrasenia = _utilidades.encriptarSHA256(usuario.Contrasenia),
+                TipoUsuario = "Usuario Nuevo"
             };
 
             await _context.Usuarios.AddAsync(usuarioModel);
@@ -45,6 +51,7 @@ namespace TNElectronics_Back.Controllers
             else
                 return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
         }
+
 
         [HttpPost]
         [Route("acceder")]

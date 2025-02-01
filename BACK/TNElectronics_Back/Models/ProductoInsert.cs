@@ -1,20 +1,23 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace TNElectronics_Back.Models
 {
     public class ProductoInsert
     {
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Nombre { get; set; } = string.Empty;
 
         [Required]
-        [Column(TypeName = "money")]
-        public decimal Precio { get; set; }
-        [Required]
-        [StringLength(100)]
+        [StringLength(250)]
         public string Descripcion { get; set; } = string.Empty;
+
+        [Required]
+        [Column(TypeName = "decimal(10,2)")]
+        public decimal Precio { get; set; }
+
+        [Required]
+        public int Cantidad { get; set; }
     }
 }

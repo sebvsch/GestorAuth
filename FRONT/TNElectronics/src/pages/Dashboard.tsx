@@ -23,6 +23,11 @@ const Dashboard: FC = () => {
                         <CardIrA titulo="Productos" direccion="/productos" colorTexto="text-orange-500" />
                     </>
                 }
+                {currentUser?.tipoUsuario === "Usuario Nuevo" &&
+                    <>
+                        <h2>Necesitas que un <span className="underline font-semibold text-blue-500">Administrador</span> te de rol para navegar por el sistema</h2>
+                    </>
+                }
             </div>
         </>
     );

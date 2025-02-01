@@ -2,7 +2,6 @@
 
 interface ImportMetaEnv {
     VITE_RECAPTCHA_KEY: string;
-    VITE_PRUEBA: string;
     VITE_URL: string;
 }
 

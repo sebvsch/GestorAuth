@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IAgregarProductos, IProductos } from "../Interfaces/General";
+import { IAgregarProductos, IEditarProducto, IProductos } from "../Interfaces/General";
 import { toast } from "react-toastify";
 
 const URL_DEV = import.meta.env.VITE_URL
@@ -41,7 +41,7 @@ export async function agregarNuevoProducto(data: IAgregarProductos) {
     }
 }
 
-export async function EditarProducto(id: number, data: IProductos) {
+export async function EditarProducto(id: number, data: IEditarProducto) {
     const token = localStorage.getItem("token");
     const url = `http://localhost:5204/api/producto/editarProducto/${id}`
     try {
