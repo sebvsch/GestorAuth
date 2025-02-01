@@ -52,16 +52,9 @@ C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_G
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_GestorAuth.csproj.CoreCompileInputs.cache
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_GestorAuth.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_GestorAuth.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_GestorAuth.sourcelink.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\staticwebassets.build.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\staticwebassets.development.json
-C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\staticwebassets\msbuild.Be_GestorAuth.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\staticwebassets\msbuild.build.Be_GestorAuth.props
-C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\staticwebassets\msbuild.buildMultiTargeting.Be_GestorAuth.props
-C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\staticwebassets\msbuild.buildTransitive.Be_GestorAuth.props
-C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\staticwebassets.pack.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\scopedcss\bundle\Be_GestorAuth.styles.css
-C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_Gesto.95A049FD.Up2Date
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_GestorAuth.dll
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\refint\Be_GestorAuth.dll
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_GestorAuth.pdb
@@ -87,3 +80,8 @@ C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\out\out\appsettings.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\out\out\Be_GestorAuth.deps.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\out\out\Be_GestorAuth.runtimeconfig.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\out\out\out\web.config
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\out\out\out\appsettings.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\out\out\out\Be_GestorAuth.deps.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\out\out\out\Be_GestorAuth.runtimeconfig.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Release\net6.0\Be_GestorAuth.csproj.CopyComplete
