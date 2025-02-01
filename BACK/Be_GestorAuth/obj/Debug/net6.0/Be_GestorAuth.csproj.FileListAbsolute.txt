@@ -131,3 +131,8 @@ C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Debug\net6.0\refint
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Debug\net6.0\Be_GestorAuth.pdb
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Debug\net6.0\Be_GestorAuth.genruntimeconfig.cache
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\obj\Debug\net6.0\ref\Be_GestorAuth.dll
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Debug\net6.0\out\web.config
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Debug\net6.0\out\appsettings.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Debug\net6.0\out\Be_GestorAuth.deps.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Debug\net6.0\out\Be_GestorAuth.runtimeconfig.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Debug\net6.0\out\global.json
