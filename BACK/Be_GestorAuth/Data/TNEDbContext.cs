@@ -3,9 +3,9 @@ using Be_GestorAuth.Models;
 
 namespace Be_GestorAuth.Data
 {
-    public class TNEDbContext : DbContext
+    public class GAContext : DbContext
     {
-        public TNEDbContext(DbContextOptions<TNEDbContext> options)
+        public GAContext(DbContextOptions<GAContext> options)
             : base(options)
         {
         }

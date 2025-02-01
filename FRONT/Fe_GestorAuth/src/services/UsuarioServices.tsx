@@ -17,7 +17,12 @@ export async function RegistrarUsuario(usuarioData: IRegistrarUsuario) {
 export async function AccesoUsuario(dataAcceso: IAccesoUsuario) {
     const url = `${URL_DEV}/api/usuario/acceder`;
     try {
-        const respuesta: AxiosResponse = await axios.post(url, dataAcceso);
+        const respuesta: AxiosResponse = await axios.post(url, dataAcceso, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         if (respuesta.data.exito) {
             localStorage.setItem('token', respuesta.data.token);
             window.location.reload();

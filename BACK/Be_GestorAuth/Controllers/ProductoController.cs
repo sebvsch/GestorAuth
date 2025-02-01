@@ -12,9 +12,9 @@ namespace Be_GestorAuth.Controllers
     [Route("api/producto")]
     public class ProductoController : ControllerBase
     {
-        private readonly TNEDbContext _context;
+        private readonly GAContext _context;
 
-        public ProductoController(TNEDbContext context)
+        public ProductoController(GAContext context)
         {
             _context = context;
         }

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Be_GestorAuth.Custom;
@@ -16,10 +15,10 @@ namespace Be_GestorAuth.Controllers
     [ApiController]
     public class AccesoController : Controller
     {
-        private readonly TNEDbContext _context;
+        private readonly GAContext _context;
         private readonly Utilidades _utilidades;
 
-        public AccesoController(TNEDbContext context, Utilidades utilidades)
+        public AccesoController(GAContext context, Utilidades utilidades)
         {
             _context = context;
             _utilidades = utilidades;

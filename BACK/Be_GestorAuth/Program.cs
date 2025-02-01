@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<TNEDbContext>(options =>
+builder.Services.AddDbContext<GAContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddSingleton<Utilidades>();
@@ -45,7 +45,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("NuevaPolitica", app =>
@@ -57,6 +56,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -65,13 +65,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseCors("NuevaPolitica");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseCors("NuevaPolitica");
 
 app.UseAuthentication();
 app.UseAuthorization();

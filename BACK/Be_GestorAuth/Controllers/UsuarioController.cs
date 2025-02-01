@@ -11,9 +11,9 @@ namespace Be_GestorAuth.Controllers
     [Route("api/usuario")]
     public class UsuarioController : ControllerBase
     {
-        private readonly TNEDbContext _context;
+        private readonly GAContext _context;
 
-        public UsuarioController(TNEDbContext context)
+        public UsuarioController(GAContext context)
         {
             _context = context;
         }
