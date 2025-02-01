@@ -1,5 +1,9 @@
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\Be_GestorAuth.exe
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\out\web.config
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\appsettings.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\out\appsettings.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\out\Be_GestorAuth.deps.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\out\Be_GestorAuth.runtimeconfig.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\Be_GestorAuth.dll
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\Be_GestorAuth.runtimeconfig.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\out\Be_GestorAuth.pdb
