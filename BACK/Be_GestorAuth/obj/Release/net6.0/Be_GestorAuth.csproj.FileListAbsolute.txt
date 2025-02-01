@@ -71,3 +71,11 @@ C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\appsettings.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\Be_GestorAuth.deps.json
 C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\Be_GestorAuth.runtimeconfig.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\web.config
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\appsettings.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\Be_GestorAuth.deps.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\Be_GestorAuth.runtimeconfig.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\web.config
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\appsettings.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\Be_GestorAuth.deps.json
+C:\Users\Sebastian\Desktop\GestorAuth\BACK\Be_GestorAuth\bin\Release\net6.0\out\out\out\Be_GestorAuth.runtimeconfig.json
