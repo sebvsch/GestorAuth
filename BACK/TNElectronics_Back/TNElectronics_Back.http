@@ -1,6 +1,0 @@
-@TNElectronics_Back_HostAddress = http://localhost:5204
-
-GET {{TNElectronics_Back_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
