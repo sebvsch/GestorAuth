@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GestorAuth.Data;
-using GestorAuth.Models;
-using GestorAuth.Models.DTOs;
+using Be_GestorAuth.Data;
+using Be_GestorAuth.Models;
+using Be_GestorAuth.Models.DTOs;
 
-namespace GestorAuth.Controllers
+namespace Be_GestorAuth.Controllers
 {
     [ApiController]
     [Route("api/usuario")]

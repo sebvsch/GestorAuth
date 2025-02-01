@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using GestorAuth.Data;
+using Be_GestorAuth.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using GestorAuth.Custom;
-using GestorAuth.Models;
+using Be_GestorAuth.Custom;
+using Be_GestorAuth.Models;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);

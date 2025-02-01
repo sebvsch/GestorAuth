@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GestorAuth.Models
+namespace Be_GestorAuth.Models
 {
     public class Usuario
     {

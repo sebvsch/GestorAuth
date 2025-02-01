@@ -3,10 +3,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using GestorAuth.Models;
+using Be_GestorAuth.Models;
 
 
-namespace GestorAuth.Custom
+namespace Be_GestorAuth.Custom
 {
     public class Utilidades
     {

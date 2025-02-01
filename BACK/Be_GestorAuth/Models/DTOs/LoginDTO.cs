@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GestorAuth.Models.DTOs
+namespace Be_GestorAuth.Models.DTOs
 {
     public class LoginDTO
     {

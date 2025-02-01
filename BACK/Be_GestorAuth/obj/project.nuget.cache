@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "dFYumCp/ZFMcbAdTDQG5OWKqqFHJEbGS6JoZtMhz2zyVLXGfyQrlQiyd6aAslDuHJkbEiko3niQm/RTDLSY92Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Sebastian\\Desktop\\GestorAuth\\BACK\\Be_GestorAuth\\GestorAuth.csproj",
+  "projectFilePath": "C:\\Users\\Sebastian\\Desktop\\Be_GestorAuth\\BACK\\Be_Be_GestorAuth\\Be_GestorAuth.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sebastian\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Sebastian\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

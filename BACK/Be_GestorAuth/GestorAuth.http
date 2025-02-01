@@ -1,6 +1,0 @@
-@GestorAuth_HostAddress = http://localhost:5204
-
-GET {{GestorAuth_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

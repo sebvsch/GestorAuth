@@ -1,4 +1,4 @@
-namespace GestorAuth.Models.DTOs
+namespace Be_GestorAuth.Models.DTOs
 {
     public class UsuarioEditDTO
     {

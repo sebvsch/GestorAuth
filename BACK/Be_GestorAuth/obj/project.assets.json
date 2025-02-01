@@ -4281,11 +4281,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sebastian\\Desktop\\GestorAuth\\BACK\\Be_GestorAuth\\GestorAuth.csproj",
-      "projectName": "GestorAuth",
-      "projectPath": "C:\\Users\\Sebastian\\Desktop\\GestorAuth\\BACK\\Be_GestorAuth\\GestorAuth.csproj",
+      "projectUniqueName": "C:\\Users\\Sebastian\\Desktop\\Be_GestorAuth\\BACK\\Be_Be_GestorAuth\\Be_GestorAuth.csproj",
+      "projectName": "Be_GestorAuth",
+      "projectPath": "C:\\Users\\Sebastian\\Desktop\\Be_GestorAuth\\BACK\\Be_Be_GestorAuth\\Be_GestorAuth.csproj",
       "packagesPath": "C:\\Users\\Sebastian\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sebastian\\Desktop\\GestorAuth\\BACK\\Be_GestorAuth\\obj\\",
+      "outputPath": "C:\\Users\\Sebastian\\Desktop\\Be_GestorAuth\\BACK\\Be_Be_GestorAuth\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sebastian\\AppData\\Roaming\\NuGet\\NuGet.Config",

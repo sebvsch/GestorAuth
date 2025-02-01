@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GestorAuth.Models.DTOs
+namespace Be_GestorAuth.Models.DTOs
 {
     public class ProductoEditDTO
     {

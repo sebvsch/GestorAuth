@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using GestorAuth.Models;
+using Be_GestorAuth.Models;
 
-namespace GestorAuth.Data
+namespace Be_GestorAuth.Data
 {
     public class TNEDbContext : DbContext
     {

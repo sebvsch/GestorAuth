@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GestorAuth.Models
+namespace Be_GestorAuth.Models
 {
     public class Producto
     {

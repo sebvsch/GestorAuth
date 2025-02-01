@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using GestorAuth.Data;
+using Be_GestorAuth.Data;
 
 #nullable disable
 
-namespace GestorAuth.Migrations
+namespace Be_GestorAuth.Migrations
 {
     [DbContext(typeof(TNEDbContext))]
     partial class TNEDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace GestorAuth.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GestorAuth.Models.Producto", b =>
+            modelBuilder.Entity("Be_GestorAuth.Models.Producto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

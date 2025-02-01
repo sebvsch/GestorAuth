@@ -1,8 +1,8 @@
 {
   "Version": 1,
   "Hash": "xUdtE7rAnBrrAtcVInq1rg3DWc8numdabGDMcT/y4xY=",
-  "Source": "GestorAuth",
-  "BasePath": "_content/GestorAuth",
+  "Source": "Be_GestorAuth",
+  "BasePath": "_content/Be_GestorAuth",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

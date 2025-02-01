@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using GestorAuth.Custom;
-using GestorAuth.Models;
-using GestorAuth.Models.DTOs;
-using GestorAuth.Data;
+using Be_GestorAuth.Custom;
+using Be_GestorAuth.Models;
+using Be_GestorAuth.Models.DTOs;
+using Be_GestorAuth.Data;
 using System.Security.Claims;
 
 
-namespace GestorAuth.Controllers
+namespace Be_GestorAuth.Controllers
 {
     [Route("api/usuario")]
     [AllowAnonymous]
