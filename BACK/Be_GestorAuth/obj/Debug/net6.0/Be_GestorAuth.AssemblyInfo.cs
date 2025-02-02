@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Be_GestorAuth")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0dd8b2a78fa0af638c5c523426f78a64a2e7171e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97f197c3f028078ff0ef2c00d81fc69bb6a27e72")]
 [assembly: System.Reflection.AssemblyProductAttribute("Be_GestorAuth")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Be_GestorAuth")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
