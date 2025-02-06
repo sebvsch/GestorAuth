@@ -18,10 +18,8 @@ builder.Services.AddSingleton<Utilidades>();
 
 var jwtKey = Environment.GetEnvironmentVariable("Jwt__Key")
              ?? builder.Configuration["Jwt:Key"];
-
 var issuer = Environment.GetEnvironmentVariable("Jwt__Issuer")
              ?? builder.Configuration["Jwt:Issuer"];
-
 var audience = Environment.GetEnvironmentVariable("Jwt__Audience")
                ?? builder.Configuration["Jwt:Audience"];
 
@@ -53,6 +51,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
@@ -66,8 +65,11 @@ builder.Services.AddCors(options =>
     });
 });
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-builder.WebHost.UseKestrel().UseUrls($"http://0.0.0.0:{port}");
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(int.Parse(port));
+});
 
 var app = builder.Build();
 
@@ -78,7 +80,6 @@ if (app.Environment.IsProduction())
 }
 
 app.UseCors("NuevaPolitica");
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
