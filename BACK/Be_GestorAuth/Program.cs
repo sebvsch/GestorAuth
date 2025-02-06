@@ -66,10 +66,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
 builder.WebHost.UseKestrel().UseUrls($"http://0.0.0.0:{port}");
-
 
 var app = builder.Build();
 
