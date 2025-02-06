@@ -5,15 +5,25 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Be_GestorAuth.Custom;
 using Be_GestorAuth.Models;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
+                       ?? builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<GAContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddSingleton<Utilidades>();
+
+var jwtKey = Environment.GetEnvironmentVariable("Jwt__Key")
+             ?? builder.Configuration["Jwt:Key"];
+
+var issuer = Environment.GetEnvironmentVariable("Jwt__Issuer")
+             ?? builder.Configuration["Jwt:Issuer"];
+
+var audience = Environment.GetEnvironmentVariable("Jwt__Audience")
+               ?? builder.Configuration["Jwt:Audience"];
 
 builder.Services.AddAuthentication(config =>
 {
@@ -26,12 +36,13 @@ builder.Services.AddAuthentication(config =>
     config.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        ValidateIssuer = false,
-        ValidateAudience = false,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!)),
+        ValidateIssuer = true,
+        ValidateAudience = true,
         ValidateLifetime = true,
-        ClockSkew = TimeSpan.Zero,
-        IssuerSigningKey = new SymmetricSecurityKey
-        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]!))
+        ValidIssuer = issuer,
+        ValidAudience = audience,
+        ClockSkew = TimeSpan.Zero
     };
 });
 
@@ -42,7 +53,6 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
@@ -55,7 +65,6 @@ builder.Services.AddCors(options =>
            .AllowCredentials();
     });
 });
-
 
 var app = builder.Build();
 
@@ -70,11 +79,8 @@ app.UseCors("NuevaPolitica");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
-
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();
