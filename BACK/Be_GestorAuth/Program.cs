@@ -67,17 +67,9 @@ builder.Services.AddCors(options =>
 });
 
 
-if (builder.Environment.IsProduction())
-{
-    builder.WebHost.ConfigureKestrel(options =>
-    {
-        options.ListenAnyIP(5000);
-        options.ListenAnyIP(5001, listenOptions =>
-        {
-            listenOptions.UseHttps();
-        });
-    });
-}
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseKestrel().UseUrls($"http://0.0.0.0:{port}");
+
 
 var app = builder.Build();
 
