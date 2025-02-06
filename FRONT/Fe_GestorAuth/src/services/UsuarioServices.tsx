@@ -22,7 +22,6 @@ export async function AccesoUsuario(dataAcceso: IAccesoUsuario) {
     const url = `${URL_DEV}/api/usuario/acceder`;
     try {
         const respuesta: AxiosResponse = await axios.post(url, dataAcceso, {
-            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
