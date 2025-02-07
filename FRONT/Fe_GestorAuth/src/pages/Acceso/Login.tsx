@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { IAccesoUsuario } from "../../Interfaces/IUsuario";
 import { AccesoUsuario } from "../../services/UsuarioServices";
 import { Link } from "react-router-dom";
-import { Button, Form, Input, Link as LinkNUI } from "@nextui-org/react";
+import { Button, Form, Input } from "@nextui-org/react";
 import { toast } from "react-toastify";
 
 const Login: FC = () => {

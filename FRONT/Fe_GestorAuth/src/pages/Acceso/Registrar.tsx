@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { IRegistrarUsuario } from "../../Interfaces/IUsuario";
 import { RegistrarUsuario } from "../../services/UsuarioServices";
 import { Link } from "react-router-dom";
-import { Button, Input, Link as LinkNUI, Form } from "@nextui-org/react";
+import { Button, Input, Form } from "@nextui-org/react";
 
 
 const Registrar: FC = () => {
