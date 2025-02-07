@@ -58,7 +58,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("NuevaPolitica", app =>
     {
-        app.WithOrigins("http://localhost:5173")
+        app.WithOrigins("https://gestor-auth.vercel.app/")
            .AllowAnyHeader()
            .AllowAnyMethod()
            .AllowCredentials();
