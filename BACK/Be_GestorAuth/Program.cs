@@ -23,11 +23,6 @@ var issuer = Environment.GetEnvironmentVariable("Jwt__Issuer")
 var audience = Environment.GetEnvironmentVariable("Jwt__Audience")
                ?? builder.Configuration["Jwt:Audience"];
 
-Console.WriteLine($"Jwt Key: {jwtKey}");
-Console.WriteLine($"Jwt Issuer: {issuer}");
-Console.WriteLine($"Jwt Audience: {audience}");
-
-
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
