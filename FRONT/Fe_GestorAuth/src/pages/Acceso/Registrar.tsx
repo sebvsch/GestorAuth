@@ -156,9 +156,7 @@ const Registrar: FC = () => {
                         />
                     </div>
                     <div className="mb-4">
-                        <LinkNUI>
-                            <Link to="/login" className="text-blue-500 text-xs hover:underline">Inicia sesión si ya estás registrado</Link>
-                        </LinkNUI>
+                        <Link to="/login" className="text-blue-500 text-xs hover:underline">Inicia sesión si ya estás registrado</Link>
                     </div>
                     <Button className="font-semibold w-[80%]" color="primary" size="lg" radius="lg" type='submit'>Registrarse</Button>
                 </Form>

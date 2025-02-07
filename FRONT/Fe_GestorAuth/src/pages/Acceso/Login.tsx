@@ -87,9 +87,7 @@ const Login: FC = () => {
                         />
                     </div>
                     <div className="my-3">
-                        <LinkNUI >
-                            <Link to="/registrarse" className="text-xs">¿No estas registrado?</Link>
-                        </LinkNUI>
+                        <Link to="/registrarse" className="text-xs text-blue-500 hover:underline">¿No estas registrado?</Link>
                     </div>
                     <div>
                         <Button className="font-semibold" color="primary" size="lg" radius="lg" type='submit'>Inciar Sesión</Button>

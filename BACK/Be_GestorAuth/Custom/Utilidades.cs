@@ -49,8 +49,10 @@ namespace Be_GestorAuth.Custom
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
             var jwtConfig = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
                 claims: userClaims,
-                expires: DateTime.UtcNow.AddMinutes(35),
+                expires: DateTime.UtcNow.AddHours(2),
                 signingCredentials: credentials
             );
 

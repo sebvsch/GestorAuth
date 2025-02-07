@@ -23,6 +23,11 @@ var issuer = Environment.GetEnvironmentVariable("Jwt__Issuer")
 var audience = Environment.GetEnvironmentVariable("Jwt__Audience")
                ?? builder.Configuration["Jwt:Audience"];
 
+Console.WriteLine($"Jwt Key: {jwtKey}");
+Console.WriteLine($"Jwt Issuer: {issuer}");
+Console.WriteLine($"Jwt Audience: {audience}");
+
+
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -37,7 +42,7 @@ builder.Services.AddAuthentication(config =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!)),
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = true,
+        ValidateLifetime = false,
         ValidIssuer = issuer,
         ValidAudience = audience,
         ClockSkew = TimeSpan.Zero
